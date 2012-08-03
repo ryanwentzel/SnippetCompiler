@@ -18,11 +18,6 @@ namespace Core
         public IList<string> Imports { get; private set; }
 
         /// <summary>
-        /// Gets or sets the namespace for this snippet.
-        /// </summary>
-        public string Namespace { get; set; }
-
-        /// <summary>
         /// Gets or sets the language for this snippet.
         /// </summary>
         /// <remarks>

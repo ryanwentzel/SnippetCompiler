@@ -5,7 +5,7 @@ using Core.Helpers;
 
 namespace Core
 {
-    internal sealed class WorkingDirectory
+    public sealed class TempDirectory
     {
         /// <summary>
         /// Gets the full path to the directory.
@@ -13,29 +13,31 @@ namespace Core
         private readonly string _path;
 
         /// <summary>
-        /// Instantiates a new instance of the <see cref="WorkingDirectory"/> class using a default path.
+        /// Instantiates a new instance of the <see cref="TempDirectory"/> class using a default path.
         /// </summary>
-        internal WorkingDirectory()
+        internal TempDirectory()
         {
             _path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Temp");
+            EnsureDirectoryExists();
         }
 
         /// <summary>
-        /// Instantiates a new instance of the <see cref="WorkingDirectory"/> class using the specified 
+        /// Instantiates a new instance of the <see cref="TempDirectory"/> class using the specified 
         /// path.
         /// </summary>
-        /// <param name="path">The path to the working directory.</param>
+        /// <param name="path">The path to the temp directory.</param>
         /// <exception cref="ArgumentNullException">path is null.</exception>
         /// <exception cref="ArgumentException">path is empty or whitespace.</exception>
-        internal WorkingDirectory(string path)
+        internal TempDirectory(string path)
         {
             Throw.IfNullOrWhitespace(path);
             _path = path;
+            EnsureDirectoryExists();
         }
 
         /// <summary>
-        /// Creates the working directory is does not already exist.
+        /// Creates the directory if it does not already exist.
         /// </summary>
         internal void EnsureDirectoryExists()
         {
@@ -49,7 +51,7 @@ namespace Core
         /// Returns a random file name.
         /// </summary>
         /// <param name="extension">The file's extension.</param>
-        /// <returns>A string representing the full path to a random file inside the working directory.</returns>
+        /// <returns>A string representing the full path to a random file inside the directory.</returns>
         internal string GetRandomFileName(string extension = "tmp")
         {
             Throw.IfNullOrWhitespace(extension);
@@ -57,11 +59,11 @@ namespace Core
         }
 
         /// <summary>
-        /// Allows the <see cref="WorkingDirectory"/> to be used anywhere a string is required.
+        /// Allows the <see cref="TempDirectory"/> to be used anywhere a string is required.
         /// </summary>
-        /// <param name="directory">The working directory.</param>
-        /// <returns>A string representing the full path to the working directory.</returns>
-        public static implicit operator string(WorkingDirectory directory)
+        /// <param name="directory">The temp directory.</param>
+        /// <returns>A string representing the full path to the directory.</returns>
+        public static implicit operator string(TempDirectory directory)
         {
             return directory._path;
         }

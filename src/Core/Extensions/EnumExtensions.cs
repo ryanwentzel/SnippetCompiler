@@ -19,18 +19,6 @@ namespace Core.Extensions
             return attribute != null ? attribute.DisplayName : Enum.GetName(enumType.GetType(), enumType);
         }
 
-        /// <summary>
-        /// Returns the file extension associated with the enum value.
-        /// </summary>
-        /// <param name="enumType">The <see cref="Enum"/>.</param>
-        /// <returns></returns>
-        public static string GetFileExtension(this Enum enumType)
-        {
-            var attribute = enumType.GetCustomAttribute<FileExtensionAttribute>();
-
-            return attribute != null ? attribute.Extension : string.Empty;
-        }
-
         private static T GetCustomAttribute<T>(this Enum enumType) where T : Attribute
         {
             return enumType.GetType()

@@ -5,7 +5,6 @@ namespace Core
     public enum Language
     {
         [EnumDisplayName("CSharp")]
-        [FileExtension("cs")]
         CSharp
     }
 }
