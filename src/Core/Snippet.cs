@@ -18,14 +18,31 @@ namespace Core
         public IList<string> Imports { get; private set; }
 
         /// <summary>
+        /// Gets or sets the namespace for this snippet.
+        /// </summary>
+        public string Namespace { get; set; }
+
+        /// <summary>
+        /// Gets or sets the language for this snippet.
+        /// </summary>
+        /// <remarks>
+        /// The default language is <see cref="Core.Language.CSharp"/>.
+        /// </remarks>
+        public Language Language { get; set; }
+
+        /// <summary>
         /// Gets or sets the code for this snippet.
         /// </summary>
         public string Code { get; set; }
 
+        /// <summary>
+        /// Instantiates a new instance of the <see cref="Snippet"/> class.
+        /// </summary>
         public Snippet()
         {
             References = new List<string>();
             Imports = new List<string>();
+            Language = Language.CSharp;
         }
     }
 }
